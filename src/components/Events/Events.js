@@ -30,7 +30,7 @@ export const Events = () => {
   };
 
   useEffect(() => {
-    setInterval(sendGeneratedMessage, 5000);
+    setInterval(sendGeneratedMessage, 60000);
 
     return () => {
       clearInterval(sendGeneratedMessage);

@@ -1,6 +1,6 @@
 import { Video } from "expo-av";
-import { useRef, useState } from "react";
-import { StyleSheet, Button, View, ActivityIndicator } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import { Button, View, ActivityIndicator } from "react-native";
 
 export const MessageVideo = ({ props }) => {
   const video = useRef(null);
@@ -16,7 +16,11 @@ export const MessageVideo = ({ props }) => {
       <Video
         ref={video}
         style={{
-          aspectRatio: (width / height).toFixed(2),
+          aspectRatio: isLoading
+            ? 0
+            : width && height
+            ? parseFloat((width / height).toFixed(2))
+            : 1,
           width: "100%",
           display: isLoading ? "none" : "flex",
         }}
@@ -24,13 +28,15 @@ export const MessageVideo = ({ props }) => {
         source={{
           uri: props.currentMessage.video,
         }}
-        useNativeControls
         isLooping
         onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+        useNativeControls
+        onLoad={() => {
+          setIsLoading(false);
+        }}
         onReadyForDisplay={(response) => {
           const { width, height } = response.naturalSize;
 
-          setIsLoading(false);
           setWidth(width);
           setHeight(height);
         }}
