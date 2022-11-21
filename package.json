@@ -10,9 +10,13 @@
   },
   "dependencies": {
     "expo": "~47.0.6",
+    "expo-av": "^13.0.1",
     "expo-status-bar": "~1.4.2",
+    "lorem-ipsum": "^2.0.8",
     "react": "18.1.0",
-    "react-native": "0.70.5"
+    "react-native": "0.70.5",
+    "react-native-gifted-chat": "^1.0.4",
+    "react-native-vimeo-iframe": "^1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
