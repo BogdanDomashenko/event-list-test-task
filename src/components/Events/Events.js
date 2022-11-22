@@ -9,14 +9,14 @@ export const Events = () => {
   const [messages, setMessages] = useState([]);
   const [loadEarlier, setLoadEarlier] = useState(true);
 
-  const handleLoadEarlier = () => {
+  const handleLoadEarlier = useCallback(() => {
     setLoadEarlier(false);
     setMessages((previousMessages) =>
       GiftedChat.prepend(previousMessages, initialEvents)
     );
-  };
+  }, []);
 
-  const sendGeneratedMessage = () => {
+  const sendGeneratedMessage = useCallback(() => {
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, [
         {
@@ -27,7 +27,7 @@ export const Events = () => {
         },
       ])
     );
-  };
+  }, []);
 
   useEffect(() => {
     setInterval(sendGeneratedMessage, 60000);
@@ -63,10 +63,5 @@ export const Events = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  image: {
-    resizeMode: "contain",
-    height: "100%",
-    width: "100%",
   },
 });
